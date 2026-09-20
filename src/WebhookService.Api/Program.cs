@@ -6,6 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("Default")
     ?? throw new InvalidOperationException("ConnectionStrings:Default is not configured");
 
+DatabaseMigrator.Run(connectionString);
+
 builder.Services.AddSingleton(new Database(connectionString));
 
 var app = builder.Build();
